@@ -1,0 +1,17 @@
+{
+  "last_certified_batch": "batch_2026_10_30_healthy.csv",
+  "last_certified_batch_id": "BATCH-2026-10-30",
+  "last_certified_timestamp": "2026-10-31T18:07:26+01:00",
+  "record_count": 5646,
+  "certified_batch_rows": 482,
+  "health_score": 96.4,
+  "sla_threshold_pct": 80.0,
+  "stale_warning": true,
+  "last_failed_batch": {
+    "batch_filename": "batch_2026_10_31_corrupted.csv",
+    "run_timestamp": "2026-10-31T18:07:26+01:00",
+    "health_score": 71.2,
+    "quarantined_records": 144,
+    "quarantine_file": "data/quarantine/quarantine_batch_2026_10_31_corrupted_20261031_180726.xlsx"
+  }
+}

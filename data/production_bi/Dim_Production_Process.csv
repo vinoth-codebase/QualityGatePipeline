@@ -1,0 +1,9 @@
+process_id,process_name,production_line,target_cycle_sec
+PR01,SMT Pick & Place,Line A - Electronics,42.0
+PR02,Reflow Soldering,Line A - Electronics,300.0
+PR03,Automated Optical Inspection (AOI),Line A - Electronics,35.0
+PR04,CNC Precision Machining,Line B - Mechatronics,180.0
+PR05,Actuator Sub-Assembly,Line B - Mechatronics,95.0
+PR06,Conformal Coating,Line C - Final Assembly,120.0
+PR07,End-of-Line Functional Test,Line C - Final Assembly,150.0
+PR08,Automated Calibration & Burn-In,Line C - Final Assembly,210.0

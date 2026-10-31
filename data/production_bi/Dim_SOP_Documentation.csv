@@ -1,0 +1,13 @@
+sop_id,sop_title,version,review_status,owner_role,last_reviewed_date,approval_sla_days,actual_review_days
+SOP-001,WI: Smart Sensor Module Calibration Procedure,v4.2,Approved,Quality Engineer,2026-08-14,30,22
+SOP-002,WI: SMT Placement Accuracy Verification,v3.0,Approved,Process Engineer,2026-07-02,30,27
+SOP-003,WI: Reflow Thermal Profile Validation,v2.5,Approved,Process Engineer,2026-09-10,21,18
+SOP-004,WI: Industrial Control Unit End-of-Line Test,v5.1,Approved,Test Engineer,2026-06-21,30,34
+SOP-005,WI: High-Precision Actuator Torque & Stroke Check,v2.0,Approved,Quality Engineer,2026-05-30,21,16
+SOP-006,WI: Power Supply Hi-Pot & Insulation Test,v3.3,Approved,Test Engineer,2026-09-28,14,12
+SOP-007,WI: Automated Test Station Calibration (ATE),v6.0,Approved,Metrology Lead,2026-10-05,30,25
+SOP-008,WI: Conformal Coating Thickness Inspection,v1.4,In Review,Quality Engineer,2026-10-12,30,41
+SOP-009,WI: Legacy Sensor Calibration Procedure (superseded),v3.9,Expired,Quality Engineer,2024-11-03,30,96
+SOP-010,WI: ICU Functional Test - Gen 1 Fixture,v4.0,Expired,Test Engineer,2025-01-17,30,74
+SOP-011,WI: CNC Machining First-Article Inspection,v2.2,In Review,Manufacturing Engineer,2026-10-20,21,26
+SOP-012,WI: Manual Gauge R&R Calibration Check,v1.1,Expired,Metrology Lead,2025-03-09,21,58

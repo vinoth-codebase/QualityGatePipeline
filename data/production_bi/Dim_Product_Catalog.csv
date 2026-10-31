@@ -1,0 +1,9 @@
+product_id,sku_code,product_category,spec_min_mm,spec_max_mm
+P001,SSM-T100,Smart Sensor Modules,24.8,25.2
+P002,SSM-P220,Smart Sensor Modules,18.4,18.7
+P003,ICU-X500,Industrial Control Units,120.0,121.0
+P004,ICU-M350,Industrial Control Units,95.5,96.5
+P005,HPA-L80,High-Precision Actuators,80.0,80.1
+P006,HPA-R45,High-Precision Actuators,45.2,45.35
+P007,PSA-600W,Power Supply Assemblies,210.0,212.0
+P008,PSA-1200W,Power Supply Assemblies,305.0,308.0
