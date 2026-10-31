@@ -298,8 +298,8 @@ def auto_fix_batch(file_path: str | Path) -> Path:
 # --------------------------------------------------------------------------- #
 def _print_run(r: dict) -> None:
     res: ValidationResult = r["result"]
-    icon = "✅" if r["sla_passed"] else "🚨"
-    print(f"\n{icon} {r['batch_filename']}  →  {r['health_score_pct']:.1f}%  [{r['sla_status']}]"
+    status_tag = "[PASS]" if r["sla_passed"] else "[BREACH]"
+    print(f"\n{status_tag} {r['batch_filename']}  ->  {r['health_score_pct']:.1f}%  [{r['sla_status']}]"
           f"  ({res.valid_records}/{res.total_records} valid, {res.invalid_records} quarantined)")
     for rule, c in res.rule_failure_counts.items():
         print(f"     {rule:<24} {c:>4}")
