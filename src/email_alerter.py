@@ -131,13 +131,23 @@ def _build_message(subject: str, html_body: str, attachment_path: Path | None,
     return msg
 
 
+def _ssl_context() -> ssl.SSLContext:
+    """Return an SSLContext backed by certifi's CA bundle (fixes macOS Python SSL errors)."""
+    try:
+        import certifi
+
+        return ssl.create_default_context(cafile=certifi.where())
+    except Exception:
+        return ssl.create_default_context()
+
+
 def _dispatch(msg: EmailMessage) -> tuple[bool, str]:
     """Send over SMTP-SSL if configured. Returns (sent, status_message)."""
     if not config.smtp_configured():
         return False, config.LOCAL_FALLBACK_MESSAGE
     try:
         with smtplib.SMTP_SSL(config.SMTP_HOST, config.SMTP_PORT,
-                              context=ssl.create_default_context(), timeout=20) as smtp:
+                              context=_ssl_context(), timeout=20) as smtp:
             smtp.login(config.SMTP_SENDER_EMAIL, config.SMTP_APP_PASSWORD)
             smtp.send_message(msg)
         return True, f"LIVE: Email dispatched via {config.SMTP_HOST}:{config.SMTP_PORT} to {config.ALERT_RECIPIENT_EMAIL}"
@@ -197,6 +207,7 @@ def send_sla_breach_alert(*, batch_name: str, run_timestamp: str, health_score_p
 
 def send_test_email() -> dict:
     """Interactive connectivity test from the Streamlit Alert Center."""
+    config.smtp_configured()
     subject = "[TEST - Ops Quality Gatekeeper] SMTP connectivity check"
     body = (f"<html><body style='font-family:Helvetica,Arial'><h2>✅ SMTP test successful</h2>"
             f"<p>The Ops Quality Gatekeeper can reach <b>{html.escape(config.ALERT_RECIPIENT_EMAIL)}</b>.</p>"
@@ -208,3 +219,4 @@ def send_test_email() -> dict:
     return {"recipient": config.ALERT_RECIPIENT_EMAIL, "subject": subject,
             "sent_live": sent, "status_message": status,
             "smtp_configured": config.smtp_configured()}
+

@@ -29,3 +29,4 @@ fi
 
 echo "🚀 Launching Ops Quality Gatekeeper console at http://localhost:8501"
 exec ./.venv/bin/streamlit run app.py --server.headless true --browser.gatherUsageStats false
+
