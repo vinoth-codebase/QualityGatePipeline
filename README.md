@@ -1,7 +1,7 @@
 # Enterprise Operations Quality — Pre-BI Data Validation Gatekeeper, SLA Monitor & Document Traceability Pipeline
 
-> Stops corrupted daily operational uploads from breaking the morning executive **Power BI** dashboards.
-> Every batch passes a **6-rule vectorized quality gate** with an **80.0 % Data Quality SLA**. If a batch fails, Power BI keeps serving the **Last-Known-Good (LKG)** snapshot, the bad rows go to an Excel quarantine workbook, and an HTML alert is sent to **na.vinothkumar2026@gmail.com**.
+Stops corrupted daily operational uploads from breaking the morning executive **Power BI** dashboards.
+Every batch passes a **6-rule vectorized quality gate** with an **80.0 % Data Quality SLA**. If a batch fails, Power BI keeps serving the **Last-Known-Good (LKG)** snapshot, the bad rows go to an Excel quarantine workbook, and an HTML alert will be sent to respective email(for now it configured with na.vinothkumar2026@gmail.com).
 
 Runs natively on **macOS** with Python `venv`. No Docker, cloud services or database server required.
 
