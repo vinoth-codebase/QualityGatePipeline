@@ -107,7 +107,7 @@ Failures injected into the corrupted batch: 30 PK duplicates (15 within the batc
 * Body: a batch summary table, a rule-by-rule breakdown, confirmation that the LKG lock is in place, and remediation steps. The `.xlsx` quarantine workbook is attached.
 * A copy of each alert is always saved to `data/quarantine/latest_email_alert.html`, with the dispatch status in `latest_email_status.json`.
 * **Live sending:** run `cp .env.example .env`, then set `SMTP_SENDER_EMAIL` and a 16-character Gmail **App Password** in `SMTP_APP_PASSWORD`. Mail goes out through `smtp.gmail.com:465` (SSL).
-  If these values are missing, or you're offline, the app records *"HTML Alert Generated & Saved Locally (Configure .env SMTP_APP_PASSWORD for live Gmail dispatch to na.vinothkumar2026@gmail.com)"* and keeps running.
+  If these values are missing, or you're offline, the app records *"HTML Alert Generated & Saved Locally"* and keeps running.
 
 ---
 
