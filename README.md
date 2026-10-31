@@ -83,8 +83,8 @@ python -m src.pipeline --auto-fix data/landing_zone/batch_2026_10_31_corrupted.c
 
 | File | Rows | Valid | Health | Result |
 |---|---|---|---|---|
-| `batch_2026_10_30_healthy.csv` | 500 | 482 | **96.4 %** | ✅ PASS: promoted to Power BI |
-| `batch_2026_10_31_corrupted.csv` | 500 | 356 | **71.2 %** | 🚨 BREACH: LKG kept, Excel quarantine, email alert |
+| `batch_2026_10_30_healthy.csv` | 500 | 482 | **96.4 %** | PASS: promoted to Power BI |
+| `batch_2026_10_31_corrupted.csv` | 500 | 356 | **71.2 %** | BREACH: LKG kept, Excel quarantine, email alert |
 
 Failures injected into the corrupted batch: 30 PK duplicates (15 within the batch, 15 already in production), 28 critical nulls, 26 `process_id` FK orphans, 10 type errors, 30 range anomalies and 20 rows that use an Expired SOP.
 
