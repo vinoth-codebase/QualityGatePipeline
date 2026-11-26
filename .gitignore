@@ -23,3 +23,9 @@ db/*.db-journal
 # Streamlit
 .streamlit/secrets.toml
 
+
+# CI/CD & test reports
+reports/
+.cache/
+
+
