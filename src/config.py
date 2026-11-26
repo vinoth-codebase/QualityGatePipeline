@@ -13,7 +13,7 @@ from __future__ import annotations
 import os
 from pathlib import Path
 
-from dotenv import load_dotenv
+from dotenv import dotenv_values, load_dotenv
 
 # --------------------------------------------------------------------------- #
 # Project paths
@@ -95,6 +95,14 @@ _PLACEHOLDER_VALUES = {"", "your_sender@gmail.com", "your_16_char_app_password",
 
 def smtp_configured() -> bool:
     """True only when real (non-placeholder) Gmail SMTP credentials exist."""
+    global SMTP_SENDER_EMAIL, SMTP_APP_PASSWORD, SMTP_HOST, SMTP_PORT
+    env_file = Path(PROJECT_ROOT) / ".env"
+    if env_file.exists():
+        vals = dotenv_values(env_file)
+        SMTP_HOST = (vals.get("SMTP_HOST") or SMTP_HOST or "smtp.gmail.com").strip()
+        SMTP_PORT = int(vals.get("SMTP_PORT") or SMTP_PORT or 465)
+        SMTP_SENDER_EMAIL = (vals.get("SMTP_SENDER_EMAIL") or "").strip()
+        SMTP_APP_PASSWORD = (vals.get("SMTP_APP_PASSWORD") or "").replace(" ", "").strip()
     return (
         SMTP_SENDER_EMAIL not in _PLACEHOLDER_VALUES
         and SMTP_APP_PASSWORD not in _PLACEHOLDER_VALUES
@@ -116,3 +124,4 @@ def ensure_directories() -> None:
     """Create every runtime directory if missing (idempotent)."""
     for folder in (LANDING_ZONE_DIR, PRODUCTION_BI_DIR, QUARANTINE_DIR, DB_DIR):
         Path(folder).mkdir(parents=True, exist_ok=True)
+

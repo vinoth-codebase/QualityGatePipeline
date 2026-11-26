@@ -236,3 +236,4 @@ def export_star_schema(conn: sqlite3.Connection, out_dir: Path | None = None) ->
         df.to_csv(path, index=False)
         written[table] = path
     return written
+

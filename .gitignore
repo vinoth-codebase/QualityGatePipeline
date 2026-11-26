@@ -22,3 +22,4 @@ db/*.db-journal
 
 # Streamlit
 .streamlit/secrets.toml
+
