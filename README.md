@@ -173,7 +173,7 @@ mkdir -p reports
 pytest tests/test_validator.py -v --junitxml=reports/junit.xml
 
 # 3. Module import smoke check
-python -c "import src.pipeline, src.validator, src.database; print('Smoke check passed: core modules imported cleanly.')"
+python -c "import src.pipeline, src.validator, src.database; print('Smoke check passed - core modules imported cleanly.')"
 ```
 
 Author: **Vinothkumar N** · vinothofficial14@gmail.com
