@@ -127,6 +127,7 @@ Failures injected into the corrupted batch: 30 PK duplicates (15 within the batc
 
 ```text
 ops-quality-data-gatekeeper/
+├── .gitlab-ci.yml             GitLab CI/CD 3-stage quality pipeline
 ├── app.py                     Streamlit + Plotly console
 ├── run_app.sh                 one-command macOS launcher
 ├── setup_git_history.sh       reproducible commit history
@@ -140,6 +141,39 @@ ops-quality-data-gatekeeper/
 ├── data/landing_zone | production_bi | quarantine
 ├── db/ops_quality_gatekeeper.db
 └── tests/test_validator.py
+```
+
+---
+
+## CI/CD Pipeline (GitLab CI)
+
+The repository includes a three-stage GitLab CI/CD pipeline defined in `.gitlab-ci.yml` using the `python:3.11-slim` container image with cached `pip` dependencies (`.cache/pip`).
+
+| Stage | Job | Purpose |
+|---|---|---|
+| `lint` | `lint_and_shell_check` | Runs `flake8` across `src/`, `tests/`, and `app.py` for syntax and undefined-name errors (`E9,F63,F7,F82`) and validates `run_app.sh` with `bash -n`. |
+| `test` | `automated_tests` | Executes the `pytest` suite (`tests/test_validator.py`) covering all six validation rules, the 80.0% SLA boundary, Last-Known-Good preservation, and auto-remediation, publishing `reports/junit.xml`. |
+| `verify` | `module_smoke_check` | Performs a post-test Python import smoke test on `src.pipeline`, `src.validator`, and `src.database`. |
+
+### JUnit Test and KPI Reporting
+
+Every `automated_tests` run exports `reports/junit.xml` as a GitLab JUnit report artifact (`when: always`, `expire_in: 14 days`) so merge requests and pipeline summaries display test pass rates, execution durations, and failure traces directly in the GitLab UI.
+
+### Running Pipeline Checks Locally
+
+```bash
+source .venv/bin/activate
+
+# 1. Lint & shell check
+flake8 src/ tests/ app.py --count --select=E9,F63,F7,F82 --show-source --statistics
+bash -n run_app.sh
+
+# 2. Automated tests with JUnit XML output
+mkdir -p reports
+pytest tests/test_validator.py -v --junitxml=reports/junit.xml
+
+# 3. Module import smoke check
+python -c "import src.pipeline, src.validator, src.database; print('Smoke check passed: core modules imported cleanly.')"
 ```
 
 Author: **Vinothkumar N** · vinothofficial14@gmail.com

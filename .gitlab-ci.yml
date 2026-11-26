@@ -1,0 +1,49 @@
+image: python:3.11-slim
+
+stages:
+  - lint
+  - test
+  - verify
+
+variables:
+  PIP_CACHE_DIR: "$CI_PROJECT_DIR/.cache/pip"
+  PYTHONDONTWRITEBYTECODE: "1"
+  PYTHONUNBUFFERED: "1"
+
+cache:
+  key: "$CI_COMMIT_REF_SLUG"
+  paths:
+    - .cache/pip
+
+before_script:
+  - python --version
+  - pip install --upgrade pip
+  - pip install -r requirements.txt
+
+lint_and_shell_check:
+  stage: lint
+  script:
+    - pip install flake8
+    - flake8 src/ tests/ app.py --count --select=E9,F63,F7,F82 --show-source --statistics
+    - bash -n run_app.sh
+
+automated_tests:
+  stage: test
+  script:
+    - pip install pytest
+    - mkdir -p reports
+    - pytest tests/test_validator.py -v --junitxml=reports/junit.xml
+  artifacts:
+    when: always
+    expire_in: 14 days
+    paths:
+      - reports/junit.xml
+    reports:
+      junit: reports/junit.xml
+
+module_smoke_check:
+  stage: verify
+  needs:
+    - automated_tests
+  script:
+    - python -c "import src.pipeline, src.validator, src.database; print('Smoke check passed: core modules imported cleanly.')"
