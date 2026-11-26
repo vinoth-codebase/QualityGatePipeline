@@ -93,8 +93,8 @@ def build_html_body(*, batch_name: str, run_timestamp: str, health_score_pct: fl
     <th style="padding:8px;text-align:right">Share</th></tr>
     {''.join(rows)}
   </table>
-  <div style="margin:22px 0;padding:14px 16px;background:#ecfdf5;border-left:5px solid #059669;border-radius:4px;font-size:14px">
-    <b>🔒 Power BI Production Tables remain locked to the Last-Known-Good snapshot.</b><br>
+  <div style="margin:22px 0;padding:14px 16px;background:#f8fafc;border-left:4px solid #0f172a;border-radius:4px;font-size:14px">
+    <b>Power BI Production Tables remain locked to the Last-Known-Good snapshot.</b><br>
     No data from this batch was promoted to <code>data/production_bi/</code>. Executive dashboards continue to serve
     certified batch <b>{html.escape(str(lkg.get("last_certified_batch", "n/a")))}</b>
     (certified {html.escape(str(lkg.get("last_certified_timestamp", "n/a")))},
@@ -209,7 +209,7 @@ def send_test_email() -> dict:
     """Interactive connectivity test from the Streamlit Alert Center."""
     config.smtp_configured()
     subject = "[TEST - Ops Quality Gatekeeper] SMTP connectivity check"
-    body = (f"<html><body style='font-family:Helvetica,Arial'><h2>✅ SMTP test successful</h2>"
+    body = (f"<html><body style='font-family:Helvetica,Arial'><h2>SMTP test successful</h2>"
             f"<p>The Ops Quality Gatekeeper can reach <b>{html.escape(config.ALERT_RECIPIENT_EMAIL)}</b>.</p>"
             f"<p>Sent {datetime.now().astimezone():%Y-%m-%d %H:%M:%S %Z}.</p></body></html>")
     try:

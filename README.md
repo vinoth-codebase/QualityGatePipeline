@@ -1,7 +1,7 @@
 # Enterprise Operations Quality — Pre-BI Data Validation Gatekeeper, SLA Monitor & Document Traceability Pipeline
 
-> Stops corrupted daily operational uploads from breaking the morning executive **Power BI** dashboards.
-> Every batch passes a **6-rule vectorized quality gate** with an **80.0 % Data Quality SLA**. If a batch fails, Power BI keeps serving the **Last-Known-Good (LKG)** snapshot, the bad rows go to an Excel quarantine workbook, and an HTML alert is sent to **na.vinothkumar2026@gmail.com**.
+Stops corrupted daily operational uploads from breaking the morning executive **Power BI** dashboards.
+Every batch passes a **6-rule vectorized quality gate** with an **80.0 % Data Quality SLA**. If a batch fails, Power BI keeps serving the **Last-Known-Good (LKG)** snapshot, the bad rows go to an Excel quarantine workbook, and an HTML alert will be sent to respective email(for now it is configured with na.vinothkumar2026@gmail.com).
 
 Runs natively on **macOS** with Python `venv`. No Docker, cloud services or database server required.
 
@@ -83,8 +83,8 @@ python -m src.pipeline --auto-fix data/landing_zone/batch_2026_10_31_corrupted.c
 
 | File | Rows | Valid | Health | Result |
 |---|---|---|---|---|
-| `batch_2026_10_30_healthy.csv` | 500 | 482 | **96.4 %** | ✅ PASS: promoted to Power BI |
-| `batch_2026_10_31_corrupted.csv` | 500 | 356 | **71.2 %** | 🚨 BREACH: LKG kept, Excel quarantine, email alert |
+| `batch_2026_10_30_healthy.csv` | 500 | 482 | **96.4 %** | PASS: promoted to Power BI |
+| `batch_2026_10_31_corrupted.csv` | 500 | 356 | **71.2 %** | BREACH: LKG kept, Excel quarantine, email alert |
 
 Failures injected into the corrupted batch: 30 PK duplicates (15 within the batch, 15 already in production), 28 critical nulls, 26 `process_id` FK orphans, 10 type errors, 30 range anomalies and 20 rows that use an Expired SOP.
 
@@ -107,7 +107,7 @@ Failures injected into the corrupted batch: 30 PK duplicates (15 within the batc
 * Body: a batch summary table, a rule-by-rule breakdown, confirmation that the LKG lock is in place, and remediation steps. The `.xlsx` quarantine workbook is attached.
 * A copy of each alert is always saved to `data/quarantine/latest_email_alert.html`, with the dispatch status in `latest_email_status.json`.
 * **Live sending:** run `cp .env.example .env`, then set `SMTP_SENDER_EMAIL` and a 16-character Gmail **App Password** in `SMTP_APP_PASSWORD`. Mail goes out through `smtp.gmail.com:465` (SSL).
-  If these values are missing, or you're offline, the app records *"HTML Alert Generated & Saved Locally (Configure .env SMTP_APP_PASSWORD for live Gmail dispatch to na.vinothkumar2026@gmail.com)"* and keeps running.
+  If these values are missing, or you're offline, the app records *"HTML Alert Generated & Saved Locally"* and keeps running.
 
 ---
 

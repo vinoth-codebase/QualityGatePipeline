@@ -23,6 +23,10 @@ db/*.db-journal
 # Streamlit
 .streamlit/secrets.toml
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 4d37bc9581dbf0a7ae0ed8e36bf3d9eba573cf08
 # CI/CD & test reports
 reports/
 .cache/
