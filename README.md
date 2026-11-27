@@ -1,4 +1,4 @@
-# Enterprise Operations Quality — Pre-BI Data Validation Gatekeeper, SLA Monitor & Document Traceability Pipeline
+# Enterprise Operations Quality: Pre-BI Data Validation Gatekeeper, SLA Monitor & Document Traceability Pipeline
 [![pipeline status](https://gitlab.com/vinoth-codebase/qualitygatepipeline01/badges/main/pipeline.svg)](https://gitlab.com/vinoth-codebase/qualitygatepipeline01/-/pipelines)
 
 Stops corrupted daily operational uploads from breaking the morning executive **Power BI** dashboards.
